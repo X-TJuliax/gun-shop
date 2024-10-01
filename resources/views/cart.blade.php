@@ -12,9 +12,12 @@
 
 <div id="app">
 
-    <h2>Search Results for "{{ $query }}"</h2>
-    <search-component :products="{{ $results }}"></search-component>
+   <h2>{{Auth::user()->name}}</h2>
+   <h2>{{Auth::user()->email}}</h2>
+
+    <cart-component></cart-component>
 </div>
+
 
 </body>
 </html>

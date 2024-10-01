@@ -43,6 +43,11 @@ app.component('accessory-component', AccessoryComponent);
 
 import SearchResult from './components/SearchResult.vue';
 app.component('search-component', SearchResult);
+import UserDropdown from './components/Login.vue';
+app.component('user-dropdown', UserDropdown);
+
+import CartComponent from './components/Cart.vue';
+app.component('cart-component', CartComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

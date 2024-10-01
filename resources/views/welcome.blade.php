@@ -87,17 +87,47 @@
             <input type="search" class="form-control me-2" name="query" placeholder="Search..." aria-label="Search" required>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <div class="dropdown text-end me-lg-3">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
+        {{-- Blade template --}}
+<div class="dropdown text-end me-lg-3">
+    @auth  <!-- This section will only be shown if the user is authenticated -->
+        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{-- Display user avatar or default profile picture --}}
+            
+            <img src="{{ Auth::user()->avatar_url ?? 'https://github.com/mdo.png' }}" alt="{{ Auth::user()->name }}" width="32" height="32" class="rounded-circle">
+            <span>{{Auth::user()->name}}</span>
+        </a>
+        <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                   Sign out
+                </a>
+            </li>
+        </ul>
+        
+        {{-- Logout Form --}}
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Redirect to login if not authenticated --}}
+        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+    @endauth
+</div>
+     
+<div class="cart-icon">
+    <form action="{{ route('cart.view') }}" method="GET">
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                <path d="M0 1a1 1 0 0 1 1-1h1.126l.226.895L2.75 2H14.5a.5.5 0 0 1 .491.592l-1.5 6A.5.5 0 0 1 13 9H4a.5.5 0 0 1-.491-.408L2.01 2H1V1zm2.528 1L4.15 7.527l7.245.001L12.97 3H3.28l-.752-2zM5 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm6 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+            </svg>
+        </button>
+    </form>
+</div>
+
 
 
         <!-- Navbar Toggler -->
@@ -112,8 +142,7 @@
 
 <main>
 <div id='app'>
-
-  <section class="py-5 text-center container">
+    <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Welcome</h1>

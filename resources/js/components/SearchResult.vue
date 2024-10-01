@@ -14,6 +14,7 @@
                   </div>
                   <small class="text-body-secondary">Brand: {{ product.brand }}</small>
                   <small class="text-body-secondary">Price: ${{ product.price }}</small>
+
                 </div>
               </div>
             </div>

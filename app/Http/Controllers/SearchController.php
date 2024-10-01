@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;  // Assuming you are searching through products
 use App\Models\Accessory;  // Assuming you are searching through products
+use App\Models\User;  // Assuming you are searching through products
 
 class SearchController extends Controller
 {

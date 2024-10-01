@@ -11,7 +11,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+                    <button @click="addToCart(accessory)" class="btn btn-sm btn-outline-secondary">Add to cart</button>
                   </div>
                   <small class="text-body-secondary">Brand: {{ accessory.brand }}</small>
                   <small class="text-body-secondary">Price: ${{ accessory.price }}</small>
@@ -25,7 +25,10 @@
   </template>
   
   <script>
+  import axios from 'axios';
+
   export default {
+    
     data() {
       return {
         accessories: []
@@ -36,7 +39,22 @@
         .then(response => {
           this.accessories = response.data;
         });
+    },
+    methods: {
+    addToCart(accessory) {
+      axios.post('/cart/add', {
+        accessory_id: accessory.id,
+        quantity: 1,
+        price: accessory.price
+      })
+      .then(response => {
+        alert('Accessory added to cart!');
+      })
+      .catch(error => {
+        console.error(error);
+      });
     }
+  }
   };
   </script>
   
